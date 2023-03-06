@@ -100,8 +100,8 @@ class SampleGenerator:
         self.sample_requests = None
         self.reload_config()
         print(f" * SampleGenerator initialized with {len(self.sample_requests)} prompts, generating samples every {self.sample_steps} training steps, using scheduler '{self.scheduler}' with {self.num_inference_steps} inference steps")
-        if not os.path.exists(f"{log_folder}/samples/"):
-            os.makedirs(f"{log_folder}/samples/")
+        if not os.path.exists(f"kaggle/working/samples/"):
+            os.makedirs(f"kaggle/working/samples/")
 
     def reload_config(self):
         try:
@@ -257,8 +257,8 @@ class SampleGenerator:
                     prompt = prompts[prompt_idx]
                     clean_prompt = clean_filename(prompt)
 
-                    result.save(f"{self.log_folder}/samples/gs{global_step:05}-{sample_index}-{clean_prompt[:100]}.jpg", format="JPEG", quality=95, optimize=True, progressive=False)
-                    with open(f"{self.log_folder}/samples/gs{global_step:05}-{sample_index}-{clean_prompt[:100]}.txt", "w", encoding='utf-8') as f:
+                    result.save(f"kaggle/working/samples/gs{global_step:05}-{sample_index}-{clean_prompt[:100]}.jpg", format="JPEG", quality=95, optimize=True, progressive=False)
+                    with open(f"kaggle/working/samples/gs{global_step:05}-{sample_index}-{clean_prompt[:100]}.txt", "w", encoding='utf-8') as f:
                         f.write(str(batch[prompt_idx]))
 
                     tfimage = transforms.ToTensor()(result)
